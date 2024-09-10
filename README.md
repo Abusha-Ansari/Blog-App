@@ -1,30 +1,33 @@
+<!-- STRUCTURE FOR WEB -->
 /src
   /components
     - Navbar.js
-    - BlogList.js
-    - BlogForm.js
-    - BlogDetails.js
-    - BlogEditForm.js
+    
   /pages
-    - HomePage.js
-    - CreateBlogPage.js
-    - EditBlogPage.js
-    - BlogDetailsPage.js
+    - HomePage.jsx
+    - CreateBlog.jsx
+    - EditBlog.jsx
+    - AllBlogs.jsx
+    - About.jsx
+    
   /utils
     - api.js (for handling API calls)
-  - App.js
+  - Layouts.js
   - index.js
+  
+    /api
+    - FetchData.jsx
+        -CREATE READ UPDATE DELETE
 
 
 
+<!-- Rough Apis to Work On -->
+export const fetchBlogs = () => ()
+export const createBlog = (newBlog) => ()
+export const updateBlog = (id, updatedBlog) => ()
+export const deleteBlog = (id) => ()
 
-export const fetchBlogs = () => { /* Fetch all blogs */ };
-export const fetchBlogById = (id) => { /* Fetch single blog */ };
-export const createBlog = (newBlog) => { /* Create a new blog */ };
-export const updateBlog = (id, updatedBlog) => { /* Update an existing blog */ };
-export const deleteBlog = (id) => { /* Delete blog by id */ };
-
-
+<!-- Navbar -->
 Navbar items:
             Logo
             Home / Create Blog / Edit Blog / About
