@@ -1,3 +1,14 @@
+PACKAGES NEED TO BE INSTALLED:- (Everything needs to be installed inside the Blogging App (cd Blog-Web-APP))
+    NODE MODULES (npm i)
+    AXIOS (npm i axios)
+    REACT ROUTER DOM (npm i react-router-dom)
+    UUID (npm i uuid)
+
+To run file 
+    1) cd Blog-Web-APP
+    npm run dev
+
+
 <!-- STRUCTURE FOR WEB -->
 /src
   /components
@@ -11,7 +22,7 @@
     - About.jsx
     
   /utils
-    - api.js (for handling API calls)
+    <!-- - api.js (for handling API calls) -->
   - Layouts.js
   - index.js
   

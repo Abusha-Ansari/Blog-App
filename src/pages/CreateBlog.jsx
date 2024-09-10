@@ -1,38 +1,23 @@
 import React, { useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { postData } from "../Api/FetchData";
 
 function CreateBlog() {
-  const { Data, setData, setValid } = useOutletContext();
+  const { Data, setData } = useOutletContext();
   const [newTitle, setNewTitle] = useState("");
   const [newBody, setNewBody] = useState("");
 
-  const handleAddBlog = async (e) => {
+  const handleAddBlog = (e) => {
     e.preventDefault();
-    
-    
-    const nextId = Data.length > 0 ? Math.max(...Data.map(blog => blog.id)) + 1 : 1;
-  
+
     const newBlog = {
-      id: nextId, 
+      id: Date.now(), 
       title: newTitle,
       body: newBody,
     };
-    addDataToApi(newBlog);
-  };
 
-  const addDataToApi = async (newBlog) => {
-    try {
-      const res = await postData(newBlog);
-      if (res.status === 201) {
-        
-        setData((prevData) => [...prevData, res.data]);
-        setValid(true); 
-        console.log("Blog added:", res.data);
-      }
-    } catch (error) {
-      console.error("Error adding blog:", error);
-    }
+    setData([...Data, newBlog]);
+    setNewTitle("");
+    setNewBody("");
   };
 
   return (
