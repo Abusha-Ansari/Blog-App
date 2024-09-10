@@ -11,8 +11,8 @@ export const getData = () => {
 };
 
 // Post (using manual add using hooks)
-export const postData = ()=>{
-    return app.post("");
+export const postData = (blog)=>{
+    return app.post("/posts" , blog);
 };
 
 // Put
@@ -24,3 +24,4 @@ export const putData = ()=>{
 export const deleteData = (id)  =>{
     return app.delete(`/posts/${id}`);
 };
+

@@ -3,17 +3,18 @@ import { deleteData, getData } from "../Api/FetchData";
 import {useOutletContext} from 'react-router-dom'
 
 function AllBlog() {
+
   const { Data, setData , Valid , setValid } = useOutletContext();
 
   const fetchData = async () => {
-    if(Valid===false){
-      try {
-        const res = await getData();
-        setData(res.data);
-      } catch (error) {
-        console.log(error);
+      if(Valid===false){
+        try {
+          const res = await getData();
+          setData(res.data);
+        } catch (error) {
+          console.log(error);
+        }
       }
-    }
   };
 
   useEffect(() => {

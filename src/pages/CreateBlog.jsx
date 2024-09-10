@@ -1,81 +1,38 @@
-// import React, { useState } from 'react'
-// import {useOutletContext} from 'react-router-dom'
-
-
-// function CreateBlog() {
-//   const { Data, setData , Valid , setValid } = useOutletContext();
-//   const [newTitle,setnewTitle] = useState("");
-//   const [newBody,setnewBody] = useState("");
-
-//   const handleAddBlog = (e) => {
-//     e.preventDefault();
-
-//     const newBlog = {
-//       id: Data.length + 1,
-//       title: newTitle,
-//       body: newBody
-//     };
-
-//     setData([...Data, newBlog]);
-//     setValid(true)
-//     console.log('data added')
-//   };
-
-//   return (
-//     <>
-//       <form onSubmit={handleAddBlog}>
-//         <label htmlFor="title">Title</label>
-//         <br />
-//         <input
-//           id="title"
-//           type="text"
-//           value={newTitle}
-//           onChange={(e) => setnewTitle(e.target.value)}
-//           placeholder="Write Title"
-//         />
-//         <br />
-
-//         <label htmlFor="blog">Blog</label>
-//         <br />
-//         <input
-//           id="blog"
-//           type="text"
-//           value={newBody}
-//           onChange={(e) => setnewBody(e.target.value)}
-//           placeholder="Write your blog"
-//         />
-//         <br />
-
-//         <button type="submit">ADD</button>
-//       </form>
-//     </>
-//   )
-// }
-
-// export default CreateBlog
-
-
-
 import React, { useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { postData } from "../Api/FetchData";
 
 function CreateBlog() {
-  const { Data, setData, Valid, setValid } = useOutletContext();
-  const [newTitle, setnewTitle] = useState("");
-  const [newBody, setnewBody] = useState("");
+  const { Data, setData, setValid } = useOutletContext();
+  const [newTitle, setNewTitle] = useState("");
+  const [newBody, setNewBody] = useState("");
 
-  const handleAddBlog = (e) => {
+  const handleAddBlog = async (e) => {
     e.preventDefault();
-
+    
+    
+    const nextId = Data.length > 0 ? Math.max(...Data.map(blog => blog.id)) + 1 : 1;
+  
     const newBlog = {
-      id: Data.length + 1,
+      id: nextId, 
       title: newTitle,
       body: newBody,
     };
+    addDataToApi(newBlog);
+  };
 
-    setData([...Data, newBlog]);
-    setValid(true);
-    console.log("data added");
+  const addDataToApi = async (newBlog) => {
+    try {
+      const res = await postData(newBlog);
+      if (res.status === 201) {
+        
+        setData((prevData) => [...prevData, res.data]);
+        setValid(true); 
+        console.log("Blog added:", res.data);
+      }
+    } catch (error) {
+      console.error("Error adding blog:", error);
+    }
   };
 
   return (
@@ -88,7 +45,6 @@ function CreateBlog() {
           Create a New Blog
         </h2>
 
-        {/* Title Input */}
         <div className="mb-4">
           <label htmlFor="title" className="block text-blue-700 font-semibold">
             Title
@@ -97,13 +53,12 @@ function CreateBlog() {
             id="title"
             type="text"
             value={newTitle}
-            onChange={(e) => setnewTitle(e.target.value)}
+            onChange={(e) => setNewTitle(e.target.value)}
             placeholder="Write Title"
             className="w-full mt-2 p-3 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
-        {/* Blog Body Input */}
         <div className="mb-6">
           <label htmlFor="blog" className="block text-blue-700 font-semibold">
             Blog
@@ -111,13 +66,12 @@ function CreateBlog() {
           <textarea
             id="blog"
             value={newBody}
-            onChange={(e) => setnewBody(e.target.value)}
+            onChange={(e) => setNewBody(e.target.value)}
             placeholder="Write your blog"
             className="w-full mt-2 p-3 h-32 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
           />
         </div>
 
-        {/* Submit Button */}
         <div className="flex justify-center">
           <button
             type="submit"
