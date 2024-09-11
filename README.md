@@ -3,9 +3,9 @@ PACKAGES NEED TO BE INSTALLED:- (Everything needs to be installed inside the Blo
     AXIOS (npm i axios)
     REACT ROUTER DOM (npm i react-router-dom)
     UUID (npm i uuid)
+    AOS - ANIMATE ON SCROLL (npm i aos)
 
 To run file 
-    1) cd Blog-Web-APP
     npm run dev
 
 

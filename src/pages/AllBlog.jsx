@@ -15,13 +15,13 @@ function AllBlog() {
   };
 
   return (
-    <ul className="w-[100%] min-h-screen max-h-auto flex flex-row flex-wrap gap-4 justify-center items-center bg-emerald-400">
+    <ul className="w-[100%] min-h-screen max-h-auto flex flex-row flex-wrap gap-4 justify-center items-center">
       {Data.map((currBlog) => {
         const { id, title, body } = currBlog;
 
         return (
           <li key={id}>
-            <div className="h-[300px] w-[250px] m-[2rem] bg-blue-500 border-black rounded-lg p-4 hover:cursor-pointer hover:scale-110 transform transition-transform duration-300 relative">
+            <div className="h-[300px] w-[250px] m-[2rem] bg-blue-100 border border-blue-200  rounded-lg p-4 hover:cursor-pointer hover:scale-110 transform transition-transform duration-300 relative">
               <div className="flex-grow h-[240px] overflow-y-scroll no-scrollbar">
                 <p className="text-black font-semibold">Title: {title}</p>
                 <p className="text-black font-semibold">Desc: {body}</p>
