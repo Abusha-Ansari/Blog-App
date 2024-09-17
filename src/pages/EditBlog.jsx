@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useOutletContext, useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import {BlogContext} from '../Context/UserContext.jsx';
 
 function EditBlog() {
-  const { Data, setData } = useOutletContext();
+  const {Blogs,setBlogs} = useContext(BlogContext)
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [blog, setBlog] = useState({ title: "", body: "" });
 
   useEffect(() => {
-    const currentBlog = Data.find(blog => blog.id === parseInt(id));
+    const currentBlog = Blogs.find(blog => blog.id === parseInt(id));
     if (currentBlog) {
       setBlog(currentBlog);
     }
-  }, [id, Data]);
+  }, [id, Blogs]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,10 +26,10 @@ function EditBlog() {
 
   const handleSave = (e) => {
     e.preventDefault();
-    const updatedData = Data.map(item =>
+    const updatedBlogs = Blogs.map(item =>
       item.id === blog.id ? blog : item
     );
-    setData(updatedData);
+    setBlogs(updatedBlogs);
     navigate("/all-blog");
   };
 

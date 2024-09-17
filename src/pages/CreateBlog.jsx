@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useOutletContext } from "react-router-dom";
-
+import React, { useContext, useState } from "react";
+import {BlogContext} from '../Context/UserContext.jsx'
 function CreateBlog() {
-  const { Data, setData } = useOutletContext();
+
+  const {Blogs,setBlogs} = useContext(BlogContext);
   const [newTitle, setNewTitle] = useState("");
   const [newBody, setNewBody] = useState("");
 
@@ -24,7 +24,7 @@ function CreateBlog() {
       id: Date.now(),
     };
     
-    setData([...Data, newBlog]);
+    setBlogs([...Blogs, newBlog]);
     setNewTitle("");
     setNewBody("");
   };

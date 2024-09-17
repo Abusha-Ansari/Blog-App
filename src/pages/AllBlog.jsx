@@ -1,13 +1,14 @@
-import React from "react";
-import { useOutletContext, useNavigate } from "react-router-dom";
-
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import {BlogContext} from '../Context/UserContext.jsx'
 function AllBlog() {
-  const { Data, setData } = useOutletContext();
+  const {Blogs,setBlogs} = useContext(BlogContext);
+
   const navigate = useNavigate();
 
   const handleDelete = (id) => {
-    const newData = Data.filter((currItem) => currItem.id !== id);
-    setData(newData);
+    const newBlogs = Blogs.filter((currItem) => currItem.id !== id);
+    setBlogs(newBlogs);
   };
 
   const handleEdit = (id) => {
@@ -15,8 +16,9 @@ function AllBlog() {
   };
 
   return (
-    <ul className="w-[100%] min-h-screen max-h-auto flex flex-row flex-wrap gap-4 justify-center items-center">
-      {Data.map((currBlog) => {
+    <>
+      { Blogs && Blogs.length > 0 ? (<ul className="w-[100%] min-h-screen max-h-auto flex flex-row flex-wrap gap-4 justify-center items-center">
+      {Blogs.map((currBlog) => {
         const { id, title, body } = currBlog;
 
         return (
@@ -45,7 +47,8 @@ function AllBlog() {
           </li>
         );
       })}
-    </ul>
+    </ul>) : (<h1>WRITE A BLOG</h1>)}
+    </>
   );
 }
 

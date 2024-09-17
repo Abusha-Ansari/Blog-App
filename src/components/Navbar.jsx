@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import {BlogContext} from '../Context/UserContext.jsx'
 
 function Navbar() {
+  const {Blogs,setBlogs} = useContext(BlogContext)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    localStorage.setItem('Blogs', JSON.stringify(Blogs));
+  }, [Blogs])
+  
 
   return (
     <div className="bg-blue-500 w-screen p-4 shadow-md">
@@ -44,16 +51,6 @@ function Navbar() {
             to="/create-blog"
           >
             Write a Blog
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `${
-                isActive ? "text-black font-semibold " : ""
-              } hover:text-blue-300`
-            }
-            to="/edit-blog"
-          >
-            Edit Blog
           </NavLink>
           <NavLink
             className={({ isActive }) =>
@@ -114,17 +111,6 @@ function Navbar() {
             onClick={() => setIsMenuOpen(false)}
           >
             Create Blog
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `${
-                isActive ? "text-black font-semibold " : ""
-              } hover:text-blue-300`
-            }
-            to="/edit-blog"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Edit Blog
           </NavLink>
           <NavLink
             className={({ isActive }) =>

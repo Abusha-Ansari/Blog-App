@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import 'aos/dist/aos.css'; 
 import AOS from 'aos';
-import {useOutletContext} from 'react-router-dom'
+import {BlogContext} from '../Context/UserContext.jsx'
 
 function HomePage() {
-
-  const { Data } = useOutletContext();
+  const {Blogs,setBlogs} = useContext(BlogContext);
   const [recentBlogs,setrecentBlogs] = useState([]);
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
 
-    if (Data.length > 0) {
-      const recent = Data.slice(-3).reverse();
+    if (Blogs.length > 0) {
+      const recent = Blogs.slice(-3).reverse();
       setrecentBlogs(recent);
     }
 
-  }, [Data]);
+  }, [Blogs]);
 
   
   return (
