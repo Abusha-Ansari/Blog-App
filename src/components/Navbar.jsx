@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import {BlogContext} from '../Context/UserContext.jsx'
+import { BlogContext } from "../Context/UserContext.jsx";
 
 function Navbar() {
-  const {Blogs,setBlogs} = useContext(BlogContext)
+  const { Blogs, setBlogs, loggedIn } = useContext(BlogContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
@@ -11,69 +11,77 @@ function Navbar() {
   };
 
   useEffect(() => {
-    localStorage.setItem('Blogs', JSON.stringify(Blogs));
-  }, [Blogs])
-  
+    localStorage.setItem("Blogs", JSON.stringify(Blogs));
+  }, [Blogs]);
 
   return (
     <div className="bg-blue-500 w-screen p-4 shadow-md">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-
         <div className="text-white text-2xl font-bold">Logo</div>
 
-        <div className="hidden md:flex space-x-6 text-white text-lg">
-          <NavLink
-            className={({ isActive }) =>
-              `${
-                isActive ? "text-black font-semibold " : ""
-              } hover:text-blue-300`
-            }
-            to="/"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `${
-                isActive ? "text-black font-semibold " : ""
-              } hover:text-blue-300`
-            }
-            to="/all-blog"
-          >
-            All Blogs
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `${
-                isActive ? "text-black font-semibold " : ""
-              } hover:text-blue-300`
-            }
-            to="/create-blog"
-          >
-            Write a Blog
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `${
-                isActive ? "text-black font-semibold " : ""
-              } hover:text-blue-300`
-            }
-            to="/about"
-          >
-            About Us
-          </NavLink>
-        </div>
+        <div className="flex space-x-6 text-white text-lg">
+          <div className="hidden md:flex space-x-6">
+            <NavLink
+              className={({ isActive }) =>
+                `${
+                  isActive ? "text-black font-semibold" : ""
+                } hover:text-blue-300`
+              }
+              to="/"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                `${
+                  isActive ? "text-black font-semibold" : ""
+                } hover:text-blue-300`
+              }
+              to="/all-blog"
+            >
+              All Blogs
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                `${
+                  isActive ? "text-black font-semibold" : ""
+                } hover:text-blue-300`
+              }
+              to="/create-blog"
+            >
+              Write a Blog
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                `${
+                  isActive ? "text-black font-semibold" : ""
+                } hover:text-blue-300`
+              }
+              to="/about"
+            >
+              About Us
+            </NavLink>
+            {loggedIn ?  (
+              <NavLink className="hover:text-blue-300" to="/logout">
+                Logout
+              </NavLink>
+            ) : (
+              <>
+                <NavLink className="hover:text-blue-300" to="/login">
+                  Login
+                </NavLink>
+                <NavLink className="hover:text-blue-300" to="/signup">
+                  Register
+                </NavLink>
+              </>
+            )}
+          </div>
 
-        <div className="hidden md:block text-white">
-          <NavLink className="hover:text-blue-300" to="/login">
-            Sign up / Login
-          </NavLink>
-        </div>
-
-        <div className="md:hidden text-white text-xl">
-          <button onClick={handleMenuToggle} className="focus:outline-none">
-            {isMenuOpen ? "✖" : "☰"}
-          </button>
+          <div className="md:hidden text-white text-xl">
+            <button onClick={handleMenuToggle} className="focus:outline-none">
+              {isMenuOpen ? "✖" : "☰"}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -82,7 +90,7 @@ function Navbar() {
           <NavLink
             className={({ isActive }) =>
               `${
-                isActive ? "text-black font-semibold " : ""
+                isActive ? "text-black font-semibold" : ""
               } hover:text-blue-300`
             }
             to="/"
@@ -93,7 +101,7 @@ function Navbar() {
           <NavLink
             className={({ isActive }) =>
               `${
-                isActive ? "text-black font-semibold " : ""
+                isActive ? "text-black font-semibold" : ""
               } hover:text-blue-300`
             }
             to="/all-blog"
@@ -104,7 +112,7 @@ function Navbar() {
           <NavLink
             className={({ isActive }) =>
               `${
-                isActive ? "text-black font-semibold " : ""
+                isActive ? "text-black font-semibold" : ""
               } hover:text-blue-300`
             }
             to="/create-blog"
@@ -115,7 +123,7 @@ function Navbar() {
           <NavLink
             className={({ isActive }) =>
               `${
-                isActive ? "text-black font-semibold " : ""
+                isActive ? "text-black font-semibold" : ""
               } hover:text-blue-300`
             }
             to="/about"
@@ -123,13 +131,26 @@ function Navbar() {
           >
             About Us
           </NavLink>
-          <NavLink
+          {loggedIn ? <NavLink
+            className="hover:text-blue-300"
+            to="/logout"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Logout
+          </NavLink> : <><NavLink
             className="hover:text-blue-300"
             to="/login"
             onClick={() => setIsMenuOpen(false)}
           >
-            Sign up / Login
+            Login
           </NavLink>
+          <NavLink
+            className="hover:text-blue-300"
+            to="/signup"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Register
+          </NavLink></>}
         </div>
       )}
     </div>

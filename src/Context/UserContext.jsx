@@ -12,12 +12,18 @@ export const BlogProvider = ({ children }) => {
         }
     });
 
+    const [loggedIn,setloggedIn] = useState(true);
+
+    const Logout = () => {
+        setloggedIn(false)
+    }
+
     useEffect(() => {
         localStorage.setItem('myArrayKey', JSON.stringify(Blogs));
     }, [Blogs]);
 
     return (
-        <BlogContext.Provider value={{ Blogs, setBlogs }}>
+        <BlogContext.Provider value={{ Blogs, setBlogs , Logout , loggedIn , setloggedIn}}>
             {children}
         </BlogContext.Provider>
     );

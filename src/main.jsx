@@ -8,6 +8,9 @@ import EditBlog from './pages/EditBlog.jsx'
 import About from './pages/About.jsx'
 import AllBlog from './pages/AllBlog.jsx'
 import Layout from './Layout.jsx'
+import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
+import Logout from './pages/Logout.jsx'
 
 
 const router = createBrowserRouter([
@@ -17,7 +20,10 @@ const router = createBrowserRouter([
       {path: "/all-blog" , element: <AllBlog/>},
       {path: "/create-blog" , element: <CreateBlog />},
       {path: "/edit-blog/:id" , element: <EditBlog/>},
-      {path: "/about" , element: <About/>}
+      {path: "/about" , element: <About/>},
+      {path: "/login" , element: <Login/>},
+      {path: "/signup" , element: <Signup/>},
+      {path: "/logout" , element: <Logout/>}
     ]
   }
 ]);
